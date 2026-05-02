@@ -391,3 +391,42 @@ function parseAtom(t) {
 
   throw new Error('Unexpected token: ' + tok.val);
 }
+
+
+var drag_active = false;
+var drag_offset_x = 0;
+var drag_offset_y = 0;
+
+function initDrag() {
+  var wrapper = document.querySelector('.calc-wrapper');
+  var handle  = document.querySelector('.calc-header');
+
+  var rect = wrapper.getBoundingClientRect();
+  wrapper.style.left = rect.left + 'px';
+  wrapper.style.top  = rect.top  + 'px';
+
+  handle.addEventListener('mousedown', function(e) {
+    if (e.target.closest('button')) return;
+    drag_active = true;
+    var r = wrapper.getBoundingClientRect();
+    drag_offset_x = e.clientX - r.left;
+    drag_offset_y = e.clientY - r.top;
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!drag_active) return;
+    var new_x = e.clientX - drag_offset_x;
+    var new_y = e.clientY - drag_offset_y;
+    new_x = Math.max(0, Math.min(new_x, window.innerWidth  - wrapper.offsetWidth));
+    new_y = Math.max(0, Math.min(new_y, window.innerHeight - wrapper.offsetHeight));
+    wrapper.style.left = new_x + 'px';
+    wrapper.style.top  = new_y + 'px';
+  });
+
+  document.addEventListener('mouseup', function() {
+    drag_active = false;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initDrag);
