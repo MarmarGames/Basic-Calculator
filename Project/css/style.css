@@ -1,0 +1,306 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f5;
+  font-family: 'Syne', sans-serif;
+  padding: 2rem;
+}
+
+[data-theme="dark"] body, [data-theme="dark"] {
+  background: #0e0e1a;
+}
+
+.calc-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.calc-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f5f5fa;
+  border: 1px solid #e8e8ee;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-family: 'Syne', sans-serif;
+  color: #999;
+  cursor: pointer;
+  user-select: none;
+}
+.theme-toggle:hover { border-color: #7c8cf8; color: #7c8cf8; }
+
+[data-theme="dark"] .theme-toggle {
+  background: #141425;
+  border-color: #2a2a44;
+  color: #555577;
+}
+
+.calc-box {
+  width: 360px;
+  background: #ffffff;
+  border: 1px solid #e0e0e8;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
+
+[data-theme="dark"] .calc-box {
+  background: #1a1a2e;
+  border-color: #2a2a44;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+}
+
+.display {
+  background: #1a1a2e;
+  padding: 1rem 1.25rem 1rem;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+[data-theme="dark"] .display { background: #0b0b18; }
+
+#expr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  min-height: 18px;
+  word-break: break-all;
+  text-align: right;
+  color: #aaaacc;
+}
+
+#result {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 26px;
+  font-weight: 600;
+  color: #e8e8f0;
+  text-align: right;
+  word-break: break-all;
+  line-height: 1.2;
+}
+
+#err {
+  font-size: 11px;
+  color: #e06c75;
+  text-align: right;
+  line-height: 1.4;
+  margin-top: 2px;
+  min-height: 14px;
+}
+
+.kb-hint {
+  font-size: 10px;
+  color: #444466;
+  text-align: right;
+  margin-top: 4px;
+  letter-spacing: 0.03em;
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: #e8e8ee;
+}
+
+[data-theme="dark"] .btn-grid { background: #2a2a44; }
+
+.btn {
+  border: none;
+  padding: 0;
+  height: 58px;
+  font-size: 15px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  background: #ffffff;
+  color: #1a1a2e;
+  position: relative;
+}
+
+[data-theme="dark"] .btn {
+    background: #1a1a2e;
+    color: #d8d8f0;
+}
+
+.btn:hover { background: #f5f5fa; }
+[data-theme="dark"] .btn:hover { background: #22223a; }
+.btn:active { opacity: 0.7; }
+
+.btn.op { color: #7c8cf8; font-weight: 600; }
+.btn.fn { font-size: 12px; color: #56b6c2; }
+.btn.const { font-size: 15px; color: #7cf8c7; font-style: italic; font-weight: 600; }
+.btn.clear { color: #e06c75; font-weight: 600; }
+
+.btn.eq {
+  background: #7c8cf8;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  grid-column: span 4;
+}
+.btn.eq:hover { background: #6878e8; }
+.btn.eq:active { background: #5a6fd6; }
+
+.btn .kb {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  font-size: 9px;
+  color: #bbb;
+  font-family: 'JetBrains Mono', monospace;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .btn .kb { color: #444466; }
+
+.input-row {
+  padding: 10px 12px;
+  background: #f5f5fa;
+  border-top: 1px solid #e8e8ee;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+[data-theme="dark"] .input-row {
+  background: #141425;
+  border-color: #2a2a44;
+}
+
+.expr-input {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #dddde8;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #1a1a2e;
+  outline: none;
+}
+
+[data-theme="dark"] .expr-input {
+  background: #1a1a2e;
+  border-color: #2a2a44;
+  color: #d8d8f0;
+}
+
+.expr-input:focus { border-color: #7c8cf8; }
+
+.eval-btn {
+  background: transparent;
+  border: 1px solid #7c8cf8;
+  color: #7c8cf8;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.eval-btn:hover { background: rgba(124,140,248,0.08); }
+
+.history-section {
+  border-top: 1px solid #e8e8ee;
+  background: #fafafd;
+}
+
+[data-theme="dark"] .history-section {
+  border-color: #2a2a44;
+  background: #141425;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px 6px;
+}
+
+.history-header span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #999;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .history-header span { color: #555577; }
+
+.history-clear {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: #e06c75;
+  cursor: pointer;
+  font-family: 'Syne', sans-serif;
+  padding: 0;
+}
+.history-clear:hover { text-decoration: underline; }
+
+.history-list {
+  max-height: 140px;
+  overflow-y: auto;
+  padding: 0 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-list:empty::after {
+  content: 'No calculations yet';
+  font-size: 12px;
+  color: #999;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+.history-item:hover { background: #eeeef8; }
+[data-theme="dark"] .history-item:hover { background: #22223a; }
+
+.history-expr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+[data-theme="dark"] .history-expr { color: #555577; }
+
+.history-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a4a7a;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .history-val { color: #9090c8; }
