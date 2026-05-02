@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BEDMAS Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="calc-wrapper">
+  <div class="calc-header">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+      <span id="themeIcon">☀️</span>
+      <span id="themeLabel">Light</span>
+    </button>
+  </div>
+
+  <div class="calc-box">
+    <div class="display">
+      <div id="expr"></div>
+      <div id="result">0</div>
+      <div id="err"></div>
+      <div class="kb-hint">keyboard active — type anywhere</div>
+    </div>
+
+    <div class="btn-grid">
+      <button class="btn clear" id="btn-ac" onclick="clearAll()">AC<span class="kb">Esc</span></button>
+      <button class="btn fn" id="btn-sqr" onclick="append('sqrt(')">sqrt</button>
+      <button class="btn fn" id="btn-rt" onclick="append('√(')">√</button>
+      <button class="btn op" id="btn-par" onclick="smartParen()">( )<span class="kb">( )</span></button>
+
+      <button class="btn const" id="btn-pi" onclick="append('π')">π</button>
+      <button class="btn const" id="btn-e" onclick="append('e')">e</button>
+      <button class="btn fn" id="btn-exp" onclick="append('^')">x&#696;<span class="kb">^</span></button>
+      <button class="btn op" id="btn-div" onclick="append('/')">÷<span class="kb">/</span></button>
+
+      <button class="btn" id="btn-7" onclick="append('7')">7<span class="kb">7</span></button>
+      <button class="btn" id="btn-8" onclick="append('8')">8<span class="kb">8</span></button>
+      <button class="btn" id="btn-9" onclick="append('9')">9<span class="kb">9</span></button>
+      <button class="btn op" id="btn-mul" onclick="append('x')">×<span class="kb">*</span></button>
+
+      <button class="btn" id="btn-4" onclick="append('4')">4<span class="kb">4</span></button>
+      <button class="btn" id="btn-5" onclick="append('5')">5<span class="kb">5</span></button>
+      <button class="btn" id="btn-6" onclick="append('6')">6<span class="kb">6</span></button>
+      <button class="btn op" id="btn-sub" onclick="append('-')">−<span class="kb">-</span></button>
+
+      <button class="btn" id="btn-1" onclick="append('1')">1<span class="kb">1</span></button>
+      <button class="btn" id="btn-2" onclick="append('2')">2<span class="kb">2</span></button>
+      <button class="btn" id="btn-3" onclick="append('3')">3<span class="kb">3</span></button>
+      <button class="btn op" id="btn-add" onclick="append('+')">+<span class="kb">+</span></button>
+
+      <button class="btn" id="btn-dot" onclick="append('.')">.<span class="kb">.</span></button>
+      <button class="btn" id="btn-0" onclick="append('0')">0<span class="kb">0</span></button>
+      <button class="btn fn" id="btn-bk" onclick="backspace()">⌫<span class="kb">⌫</span></button>
+      <button class="btn fn" id="btn-fact" onclick="append('!')">n!<span class="kb">!</span></button>
+
+      <button class="btn eq" id="btn-eq" onclick="calculate()">=<span class="kb" style="color:rgba(255,255,255,0.45)">↵</span></button>
+    </div>
+
+    <div class="input-row">
+      <input class="expr-input" id="manualInput" placeholder="or type expression here, e.g. 3-2x2" onkeydown="if(event.key==='Enter') evalManual()" />
+      <button class="eval-btn" onclick="evalManual()">Solve ↗</button>
+    </div>
+
+    <div class="history-section">
+      <div class="history-header">
+        <span>History</span>
+        <button class="history-clear" onclick="clearHistory()">Clear</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
