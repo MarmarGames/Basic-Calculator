@@ -11,7 +11,7 @@ How to use?
   
 Move: Click and drag anywhere on the calculator to move it.
 
-Exit: Right-click anywhere on the application to close it
+Exit: Right-click anywhere on the application and press close.
 
 <h3>Information<h3>
   
