@@ -19,12 +19,20 @@ body {
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
+  position: fixed;
+  user-select: none;
 }
 
 .calc-header {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  cursor: grab;
+  user-select: none;
+}
+
+.calc-header:active {
+  cursor: grabbing;
 }
 
 .theme-toggle {
